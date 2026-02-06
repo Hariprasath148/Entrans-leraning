@@ -1,0 +1,21 @@
+<div *ngIf="!questionStatus" class="question-btn-wrapper">
+    <button class="get-question-btn" (click)="getQuestion()">Get Question</button>
+</div>
+
+<div *ngIf="questionStatus" class="question-container-wrapper">
+    <div class="header">Answer The Question</div>
+    <div class="question-wrapper">
+        <div class="question-container mb-15" *ngFor="let question of questions">
+            <div class="question"><span>{{question.id}}.</span> {{question.question}}</div>
+            <div class="question-answer-wrapper mt-15">
+                <ng-container [ngSwitch]="question.type">
+                    <app-one-line *ngSwitchCase="1" (answerChange)="setAnswer($event)" [question]="question.question" [id]="question.id"></app-one-line>
+                    <app-paragraph *ngSwitchCase="2" (answerChange)="setAnswer($event)" [question]="question.question" [id]="question.id"></app-paragraph>
+                    <app-mcq *ngSwitchCase="3" (answerChange)="setAnswer($event)" [id]="question.id" [choices]="question.choice" [question]="question.question"></app-mcq>
+                    <app-checkbox *ngSwitchCase="4" (answerChange)="setAnswer($event)" [id]="question.id" [choices]="question.choice" [question]="question.question"></app-checkbox>
+            </ng-container>
+            </div>
+        </div>
+        <button (click)="sumitAnswer()" class="submit-btn">Submit</button>     
+    </div>
+</div>
