@@ -12,6 +12,7 @@ import { OneLine } from './one-line/one-line';
 import { Mcq } from './mcq/mcq';
 import { Checkbox } from './checkbox/checkbox';
 import { QuestionPaper } from './service/question-paper';
+import { Question } from './question/question';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { QuestionPaper } from './service/question-paper';
     Paragraph,
     OneLine,
     Mcq,
-    Checkbox
+    Checkbox,
+    Question
   ],
   imports: [
     BrowserModule,

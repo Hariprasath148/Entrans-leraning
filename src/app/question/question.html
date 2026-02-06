@@ -1,0 +1,11 @@
+<div class="question-container mb-15">
+    <div class="question"><span>{{question().id}}.</span> {{question().question}}</div>
+    <div class="question-answer-wrapper mt-15">
+        <ng-container [ngSwitch]="question().type">
+            <app-one-line *ngSwitchCase="1" (answerChange)="sendToParentAnswer($event)" [question]="question().question" [id]="question().id"></app-one-line>
+            <app-paragraph *ngSwitchCase="2" (answerChange)="sendToParentAnswer($event)" [question]="question().question" [id]="question().id"></app-paragraph>
+            <app-mcq *ngSwitchCase="3" (answerChange)="sendToParentAnswer($event)" [id]="question().id" [choices]="question().choice" [question]="question().question"></app-mcq>
+            <app-checkbox *ngSwitchCase="4" (answerChange)="sendToParentAnswer($event)" [id]="question().id" [choices]="question().choice" [question]="question().question"></app-checkbox>
+        </ng-container>
+    </div>
+</div>

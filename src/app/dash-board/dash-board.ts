@@ -18,7 +18,6 @@ export class DashBoard {
   getQuestion() {
     this.questionStatus = true;
     this.questionPaperServie.getAllQuestion().subscribe(res=> {
-      console.log(res)
       this.questions.push(res);
     })
     //this.questions = this.questionPaperServie.getAllQuestion().questions;

@@ -15,8 +15,6 @@ export class Checkbox {
 
   handleInput(e : Event):any {
 
-    console.log(e)
-
     if((e.target as HTMLInputElement).checked) {
       this.answer.push((e.target as HTMLInputElement).value);
     }else {
