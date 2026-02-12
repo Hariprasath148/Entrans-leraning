@@ -7,16 +7,15 @@ import { Component, input, output } from '@angular/core';
   styleUrl: './mcq.css',
 })
 export class Mcq {
-  choices = input([]);
-  question = input("");
+  isSubmitted = input<boolean>(false);
+  question = input<any>();
   answerChange = output<any>();
-  id = input(0);
-
+  
   handleInput(e : Event):any {
     this.answerChange.emit({
-      id : this.id(),
-      question : this.question(),
-      answer : (e.target as HTMLInputElement).value
+      id : this.question().id,
+      answer : (e.target as HTMLInputElement).value,
+      isAttended : true
     });
   }
 

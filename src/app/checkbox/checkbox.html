@@ -1,3 +1,3 @@
 <div class="radio-btn-container">
-    <label *ngFor="let choice of choices()"><input type="checkbox" name="{{id()+choice}}" [value]="choice" (change)="handleInput($event)"><span>{{choice}}</span></label>
+    <label *ngFor="let choice of question().choice"><input type="checkbox" name="{{question().id+choice}}" [value]="choice" (change)="handleInput($event)" [class.error]="!question().isAttended && isSubmitted()" [checked]="question().answer.includes(choice)"><span>{{choice}}</span></label>
 </div>

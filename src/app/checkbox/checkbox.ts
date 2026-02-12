@@ -7,12 +7,15 @@ import { Component, input, output } from '@angular/core';
   styleUrl: './checkbox.css',
 })
 export class Checkbox {
-  choices = input([]);
-  question = input("");
+  isSubmitted = input<boolean>(false);
+  question = input<any>();
   answerChange = output<any>();
-  id = input(0);
   answer:string[] = [];
-
+  
+  ngOnInit() {
+    this.answer = this.question().answer;
+  }
+  
   handleInput(e : Event):any {
 
     if((e.target as HTMLInputElement).checked) {
@@ -22,9 +25,9 @@ export class Checkbox {
     }
 
     this.answerChange.emit({
-      id : this.id(),
-      question : this.question(),
-      answer : this.answer
+      id : this.question().id,
+      answer : this.answer,
+      isAttended : this.answer.length !== 0
     });
   }
 }

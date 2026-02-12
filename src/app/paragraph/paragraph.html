@@ -1,1 +1,1 @@
-<textarea (change)="handleInput($event)" rows="4"></textarea>
+<textarea (change)="handleInput($event)" rows="4" [class.error]="!question().isAttended && isSubmitted()" [value]="question().answer"></textarea>

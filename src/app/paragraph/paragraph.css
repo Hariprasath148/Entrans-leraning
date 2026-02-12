@@ -9,3 +9,7 @@ textarea:focus {
     border: 1px solid blue;
     outline: 0;
 }
+
+textarea.error {
+    border: 1px solid red;
+}

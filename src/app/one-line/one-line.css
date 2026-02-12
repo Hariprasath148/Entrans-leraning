@@ -9,3 +9,7 @@ input:focus {
     outline: none;
     border: 1px solid blue;
 }
+
+input.error {
+    border: 1px solid red;
+}

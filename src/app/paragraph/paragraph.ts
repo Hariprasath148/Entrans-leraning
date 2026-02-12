@@ -7,15 +7,15 @@ import { Component , input, output } from '@angular/core';
   styleUrl: './paragraph.css',
 })
 export class Paragraph {
-  question = input<string>("");
-  id = input<number>(-1);
+  isSubmitted = input<boolean>(false);
+  question = input<any>();
   answerChange = output<any>();
 
   handleInput(e : Event):any {
     this.answerChange.emit({
-      id : this.id(),
-      question : this.question(),
-      answer : (e.target as HTMLInputElement).value
+      id : this.question().id,
+      answer : (e.target as HTMLInputElement).value,
+      isAttended : (((e.target as HTMLInputElement).value).trim()).length !== 0
     });
   }
 }

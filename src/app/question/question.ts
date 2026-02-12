@@ -7,8 +7,10 @@ import { Component, input, output } from '@angular/core';
   styleUrl: './question.css',
 })
 export class Question {
+  isSubmitted = input<boolean>(false);
   getChildAnswer = output();
   question = input<any>();
+
   sendToParentAnswer(e : any) {
     this.getChildAnswer.emit(e);
   }

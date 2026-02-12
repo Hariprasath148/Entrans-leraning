@@ -10,29 +10,28 @@ import { QuestionPaper } from '../service/question-paper';
 export class DashBoard {
   questionStatus = false;
 
-  questions:any[] = []; 
-  answer:any = {};
+  questions:any = {}; 
 
   constructor(private questionPaperServie : QuestionPaper) {}
   
+  ngOnInit() {
+    this.questionPaperServie.question$.subscribe(data=> {
+      this.questions = data;
+    });
+  }
+
   getQuestion() {
     this.questionStatus = true;
-    this.questionPaperServie.getAllQuestion().subscribe(res=> {
-      this.questions.push(res);
-    })
-    //this.questions = this.questionPaperServie.getAllQuestion().questions;
+    this.questionPaperServie.getAllQuestion();
     console.log("This is the fetched Quesitons =",this.questions);
   }
 
   setAnswer(e : any) {
-    this.answer[e.id] = {
-      question  : e.question,
-      answer : e.answer
-    }
+    this.questionPaperServie.setAnswer(e);
   }
 
   sumitAnswer() {
-    console.log(this.answer);
+    this.questionPaperServie.checkAnswer();
   }
 
  } 
