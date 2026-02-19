@@ -3,3 +3,7 @@ label {
     padding: 10px 0;
     gap: 10px;
 }
+
+input {
+    accent-color: purple;
+}

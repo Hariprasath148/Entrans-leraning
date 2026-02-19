@@ -6,7 +6,7 @@ textarea {
 }
 
 textarea:focus {
-    border: 1px solid blue;
+    border: 1px solid purple;
     outline: 0;
 }
 

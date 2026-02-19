@@ -7,7 +7,7 @@ input {
 
 input:focus {
     outline: none;
-    border: 1px solid blue;
+    border: 1px solid purple;
 }
 
 input.error {
