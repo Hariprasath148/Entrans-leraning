@@ -11,6 +11,10 @@ export class Paragraph {
   question = input<any>();
   answerChange = output<any>();
 
+  changeError() {
+    this.question().isAttended=true;
+  }
+
   handleInput(e : Event):any {
     this.answerChange.emit({
       id : this.question().id,

@@ -27,7 +27,8 @@ export class DashBoard {
   }
 
   setAnswer(e : any) {
-    this.questionPaperServie.setAnswer(e);
+    let res = this.questionPaperServie.setAnswer(e);
+    if(!res) console.log("unable to update the question.");
   }
 
   sumitAnswer() {
