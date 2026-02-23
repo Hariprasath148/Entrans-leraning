@@ -14,7 +14,7 @@ export class Mcq {
   handleInput(e : Event):any {
     this.answerChange.emit({
       id : this.question().id,
-      answer : (e.target as HTMLInputElement).value,
+      answerList :  [(e.target as HTMLInputElement).value],
       isAttended : true
     });
   }

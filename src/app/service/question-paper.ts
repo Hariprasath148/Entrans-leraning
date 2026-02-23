@@ -1,17 +1,21 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, from, Observable  , of, Subject} from 'rxjs';
 import { Question } from '../question/question';
+import { HttpClient } from '@angular/common/http';
 
 
 @Injectable({
   providedIn: 'root',
 })
 export class QuestionPaper {
+  private baseUrl = "http://localhost:5058/";
+  constructor(private http:HttpClient) {}
 
   // type 1 = one line 
-// type 2 = paragraph 
-// type 3 = multi choice 
-// type 4 = check box
+  // type 2 = paragraph 
+  // type 3 = multi choice 
+  // type 4 = check box
+
 
   private Questions = {
     "questions" : [
@@ -105,33 +109,16 @@ export class QuestionPaper {
     submitted : false
   }
 
-  private questionSubject = new Subject<any>();
-  question$ = this.questionSubject.asObservable();
+  getAllQuestion():Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}questionPaper/getAllQuestions`);
+  }   
 
-  getAllQuestion() {
-    this.questionSubject.next(structuredClone(this.Questions));
-  }  
-
-  setAnswer(answer:any):boolean {
-    let question = this.Questions.questions.find((x:any) => x.id === answer.id);
-    if(!question) return false;
-    question!.answer = answer.answer;
-    question!.isAttended = answer.isAttended;
-    console.log(question);
-    this.questionSubject.next(structuredClone(this.Questions));
-    return true;
+  setAnswer(answer:any):Observable<any> {
+    console.log(answer);
+    return this.http.post<any>(`${this.baseUrl}questionPaper/editQuestion`,answer);
   }
   
-  checkAnswer():boolean {
-    let isCorrect:boolean = true;
-    this.Questions.submitted = true;
-    this.Questions.questions.forEach( (question:any) => {
-      if(question.required !== question.isAttended) isCorrect = false;
-    });
-    if(!isCorrect) {
-      this.questionSubject.next(structuredClone(this.Questions));
-    }
-    console.log("Answers=",this.Questions.questions);
-    return true;
+  checkAnswer():Observable<any>  {
+    return this.http.post<any>(`${this.baseUrl}questionPaper/submitQuestions`,null);
   }
 }

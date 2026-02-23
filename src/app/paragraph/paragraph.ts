@@ -18,7 +18,7 @@ export class Paragraph {
   handleInput(e : Event):any {
     this.answerChange.emit({
       id : this.question().id,
-      answer : (e.target as HTMLInputElement).value,
+      answerText : (e.target as HTMLInputElement).value,
       isAttended : (((e.target as HTMLInputElement).value).trim()).length !== 0
     });
   }

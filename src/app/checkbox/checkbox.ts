@@ -13,7 +13,7 @@ export class Checkbox {
   answer:string[] = [];
   
   ngOnInit() {
-    this.answer = this.question().answer;
+    this.answer = this.question().answerList;
   }
   
   handleInput(e : Event):any {
@@ -26,7 +26,7 @@ export class Checkbox {
 
     this.answerChange.emit({
       id : this.question().id,
-      answer : this.answer,
+      answerList : this.answer,
       isAttended : this.answer.length !== 0
     });
   }

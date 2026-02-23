@@ -13,6 +13,7 @@ import { Mcq } from './mcq/mcq';
 import { Checkbox } from './checkbox/checkbox';
 import { QuestionPaper } from './service/question-paper';
 import { Question } from './question/question';
+import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -29,11 +30,13 @@ import { Question } from './question/question';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    HttpClientModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideClientHydration(withEventReplay()),
+    provideHttpClient(withFetch()),
     QuestionPaper
   ],
   bootstrap: [App]
