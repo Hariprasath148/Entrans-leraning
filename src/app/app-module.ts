@@ -15,7 +15,7 @@ import { Mcq } from './Componets/mcq/mcq';
 import { Checkbox } from './Componets/checkbox/checkbox';
 import { QuestionPaper } from './service/question-paper';
 import { Question } from './Componets/question/question';
-import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { User } from './service/user';
 import { QuestionPaperLayout } from './Layout/question-paper-layout/question-paper-layout';
 import { AddUser } from './Componets/add-user/add-user';
@@ -24,6 +24,7 @@ import { ViewUser } from './Componets/view-user/view-user';
 import { EditUser } from './Componets/edit-user/edit-user';
 import { QuestionWrapper } from './Componets/question-wrapper/question-wrapper';
 import { Auth } from './service/auth';
+import { AuthInterceptor } from './Interceptor/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,10 @@ import { Auth } from './service/auth';
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideClientHydration(withEventReplay()),
-    provideHttpClient(withFetch()),
+    provideHttpClient(
+      withFetch(),
+      withInterceptors([AuthInterceptor])
+    ),
     QuestionPaper,
     User
   ],

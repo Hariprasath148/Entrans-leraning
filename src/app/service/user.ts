@@ -11,33 +11,31 @@ export class User {
   constructor(private http: HttpClient) {}
 
   addUser(user:any):Observable<any>{
-    return this.http.post<any>(`${this.baseUrl}/addUser`,user,{withCredentials : true});
+    return this.http.post<any>(`${this.baseUrl}/addUser`,user);
   }
 
   logIn(user:any):Observable<any>{
-    return this.http.post<any>(`${this.baseUrl}/logIn`,user,{withCredentials : true});
+    return this.http.post<any>(`${this.baseUrl}/logIn`,user);
   }
 
   logout() {
-    return this.http.post(`${this.baseUrl}/logout`,{}, {
-      withCredentials: true
-    });
+    return this.http.post(`${this.baseUrl}/logout`,{});
   }
 
   getAllUsers():Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/getAllUser`,{withCredentials : true});
+    return this.http.get<any[]>(`${this.baseUrl}/getAllUser`);
   }
 
   getUserById(id:number):Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/getUserById/${id}`,{withCredentials : true});
+    return this.http.get<any>(`${this.baseUrl}/getUserById/${id}`);
   }
 
   updateUser(updateUser:any):Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}/updateUser/${updateUser.id}`,updateUser,{withCredentials : true});
+    return this.http.put<any>(`${this.baseUrl}/updateUser/${updateUser.id}`,updateUser);
   }
 
   deleteUserById(id:number):Observable<any> {
-    return this.http.delete<any>(`${this.baseUrl}/deleteUserById/${id}`,{withCredentials : true});
+    return this.http.delete<any>(`${this.baseUrl}/deleteUserById/${id}`);
   }
 
 }
