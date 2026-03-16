@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: system-ui;
+}
+
+:root {
+    --main-color : #09637E;
+    --main-color2 : #088395;
+    --main-color3 : #7AB2B2;
+    --main-color4 : #EBF4F6;
+    --main-light : #ffe2ed;
+}
+
+html {
+    overflow-y: scroll;
+}

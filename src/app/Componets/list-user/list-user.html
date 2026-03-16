@@ -1,0 +1,32 @@
+<table *ngIf="User" class="user-table">
+    <thead>
+        <tr>
+            <th>S.No</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Role</th>
+            <th *ngIf="User.role === 'Admin'">View</th>
+            <th *ngIf="User.role === 'Admin'">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngIf="users.length == 0">
+            <td class="not-found" colspan="7">No Records Found</td>
+        </tr>
+        <ng-container *ngIf="users.length != 0">
+            <tr *ngFor="let user of users;let i = index">
+                <td>{{i+1}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.phoneNumber}}</td>
+                <td>{{user.role}}</td>
+                <td  *ngIf="User.role === 'Admin'"><a class="view-button" [routerLink]="['/dashboard/viewUser',user.id]">View</a></td>
+                <td  *ngIf="User.role === 'Admin'" class="delete-td"><button class="delete-button" (click)="deletedUserByID(user.id)">Delete</button></td>
+            </tr>
+        </ng-container>
+    </tbody>
+</table>
+
+<router-outlet></router-outlet>
+
