@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { User } from '../../service/user';
 import { Auth } from '../../service/auth';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-list-user',
@@ -13,7 +14,7 @@ export class ListUser {
   users:any[] = [];
   public User:any;
 
-  constructor(private userService:User,private authService : Auth,private cd : ChangeDetectorRef){}
+  constructor(private userService:User,private authService : Auth,private cd : ChangeDetectorRef,private toastr: ToastrService){}
 
   ngOnInit() {
     this.authService.currentUser$.subscribe(user=> {
@@ -35,10 +36,13 @@ export class ListUser {
   }
 
   deletedUserByID(id:number) {
-    this.userService.deleteUserById(id).subscribe({
-      next : (data) => {
-        this.getUserDetails();
-      },
-    })
+    if (confirm('Are you sure you want to delete this user?')){
+      this.userService.deleteUserById(id).subscribe({
+        next : (data) => {
+          this.toastr.success('Deleted');
+          this.getUserDetails();
+        },
+      })
+    }
   }
 }

@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { User } from '../../service/user';
 import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-user',
@@ -13,7 +14,7 @@ export class AddUser {
   public isError : boolean = false;
   public errorMsg : string = "";
 
-  constructor(private userService : User , private cd : ChangeDetectorRef) {}
+  constructor(private userService : User , private cd : ChangeDetectorRef,private toastr: ToastrService) {}
 
   addNewUser(addNewUserForm:NgForm) {
     console.log(addNewUserForm.value)
@@ -22,6 +23,7 @@ export class AddUser {
     this.userService.addUser(addNewUserForm.value).subscribe({
       next : (data) => {
         console.log(data);
+        this.toastr.success('User Added');
         addNewUserForm.resetForm();
         this.isError = false;
         this.cd.detectChanges();

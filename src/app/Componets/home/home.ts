@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from '../../service/user';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -20,7 +21,7 @@ export class Home {
   //   isPassword : false
   // }
  
-  constructor(private router : Router,private userService : User , private cd : ChangeDetectorRef){}
+  constructor(private router : Router,private userService : User , private cd : ChangeDetectorRef,private toastr: ToastrService){}
 
   onSubmit(e : Event , loginForm : NgForm) {
 
@@ -28,6 +29,7 @@ export class Home {
     this.isLogIn = true;
     this.userService.logIn(loginForm.value).subscribe({
       next : (data)=> {
+        this.toastr.success('Login Successfully');
         this.router.navigate(["/dashboard"]);
       },
       error : (error) => {

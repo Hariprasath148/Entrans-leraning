@@ -27,6 +27,7 @@ thead tr th {
 tbody tr td {
     padding: 10px;
     text-align: center;
+    white-space: nowrap;
 }
 
 .view-button {

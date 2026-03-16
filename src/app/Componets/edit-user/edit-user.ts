@@ -3,6 +3,7 @@ import { User } from '../../service/user';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { Auth } from '../../service/auth';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-user',
@@ -14,7 +15,7 @@ export class EditUser {
   user : any;
   public isError : boolean = false;
   public errorMsg : string = "";
-  constructor ( private userService : User,private route : ActivatedRoute,private cd : ChangeDetectorRef , private router : Router,private authService : Auth){}
+  constructor ( private userService : User,private route : ActivatedRoute,private cd : ChangeDetectorRef , private router : Router,private authService : Auth,private toastr: ToastrService){}
   public User:any;
   
   ngOnInit() {
@@ -39,6 +40,7 @@ export class EditUser {
 
     this.userService.updateUser(this.user).subscribe({
       next : (data)=> {
+        this.toastr.success('Details Updated');
         this.user = data;
         this.isError = false;
         this.router.navigate(['/dashboard/viewUser',this.user.id])
