@@ -2,7 +2,7 @@
     <div class="admin-tag">
         <p class="admin-tag-name">{{User.name}}</p>
         <div class="profile-logout-container">
-            <a [routerLink]="['/dashboard/viewUser',User.id]" class="profile"></a>
+            <a [routerLink]="['/dashboard/viewUser',User.id]" class="profile"><i class="fas fa-user"></i></a>
             <button class="logout-btn" (click)="logout()">Logout</button>
         </div>
     </div>

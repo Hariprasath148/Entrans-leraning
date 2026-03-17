@@ -33,8 +33,12 @@
     height: 35px;
     background-color: white;
     border-radius: 50%;
-    background-image: url(/profile.png);
-    background-size: contain;
+    color: #a1a1a1;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 1px;
     transition: 0.1s all ease-in;
 }
 

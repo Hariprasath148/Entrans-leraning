@@ -13,6 +13,8 @@ export class ListUser {
 
   users:any[] = [];
   public User:any;
+  
+  public searchText = "";
 
   constructor(private userService:User,private authService : Auth,private cd : ChangeDetectorRef,private toastr: ToastrService){}
 
@@ -40,5 +42,22 @@ export class ListUser {
         },
       })
     }
+  }
+
+  search() {
+    if(this.searchText.length == 0) {
+      this.getUserDetails();
+      return;
+    }
+    this.userService.search(this.searchText).subscribe({
+      next : ()=> {
+        this.cd.detectChanges();
+      }
+    });
+  }
+
+  reset() {
+    this.searchText = "";
+    this.getUserDetails();
   }
 }

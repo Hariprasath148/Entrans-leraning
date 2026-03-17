@@ -57,4 +57,9 @@ export class User {
     return this.http.delete<any>(`${this.baseUrl}/deleteUserById/${id}`);
   }
 
+  search(email:string):Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/search/${email}`).pipe(
+      tap(users => this.allUserSubject.next(users))
+    )
+  }
 }
