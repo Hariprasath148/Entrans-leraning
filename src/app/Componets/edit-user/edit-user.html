@@ -9,6 +9,7 @@
         <input type="email" id="email" name="email" class="user-input p10 mt10" [class.error]="updateUserForm.controls['email']?.['errors']?.['required'] || updateUserForm.controls['email']?.['errors']?.['email']" [(ngModel)]="user.email" required email>
         <p class="error-msg mt5" *ngIf="updateUserForm.controls['email']?.['errors']?.['required']">Enter Your Email</p>
         <p class="error-msg mt5" *ngIf="updateUserForm.controls['email']?.['errors']?.['email'] ">Invalid Email</p>
+        <p *ngIf="User.id == user.id && User.email != user.email" class="mt10 error-msg">Warning: Changing your Email may Request you to login again after reload.</p>
         <label for="phoneNumber" class="mt20">Phone Number</label>
         <input type="tel" name="phoneNumber" id="phoneNumber" [(ngModel)]="user.phoneNumber" required pattern="[0-9]{10}" class="user-input p10 mt10" [class.error]="updateUserForm.controls['phoneNumber']?.['errors']?.['required'] || updateUserForm.controls['phoneNumber']?.['errors']?.['pattern']">
         <p class="error-msg mt5" *ngIf="updateUserForm.controls['phoneNumber']?.['errors']?.['required']">Enter Your Phone Number</p>
