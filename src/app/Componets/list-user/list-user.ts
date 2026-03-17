@@ -20,18 +20,14 @@ export class ListUser {
     this.authService.currentUser$.subscribe(user=> {
       this.User = user;
     });
+    this.userService.allUser$.subscribe(data => this.users = data);
     this.getUserDetails();
   }
 
   getUserDetails() {
     this.userService.getAllUsers().subscribe({
-      next : (data)=> {
-        this.users = data;
-        this.cd.detectChanges();
-      },
-      error : (error)=> {
-        console.log(error);
-      }
+      next : () => { this.cd.detectChanges(); },
+      error : (error)=> {console.log(error);}
     });
   }
 

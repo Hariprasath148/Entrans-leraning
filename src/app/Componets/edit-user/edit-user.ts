@@ -20,6 +20,9 @@ export class EditUser {
   
   ngOnInit() {
     let id:number = Number(this.route.snapshot.paramMap.get('id'));
+    this.authService.currentUser$.subscribe(user=> {
+      this.User = user;
+    });
     this.userService.getUserById(id).subscribe({
       next : (data)=> {
         this.user = data;
@@ -29,9 +32,6 @@ export class EditUser {
         this.errorMsg = error.error.message;
         this.cd.detectChanges();
       }
-    });
-    this.authService.currentUser$.subscribe(user=> {
-      this.User = user;
     });
   }
 
