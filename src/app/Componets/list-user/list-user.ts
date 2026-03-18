@@ -57,6 +57,7 @@ export class ListUser {
   }
 
   reset() {
+    if(this.searchText.length == 0) return;
     this.searchText = "";
     this.getUserDetails();
   }
