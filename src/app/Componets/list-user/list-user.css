@@ -152,10 +152,6 @@ tbody tr {
     background-color: var(--main-color4);
 }
 
-.page-number-btn-container {
-   
-}
-
 .page-navigation-btn {
     background: transparent;
     border: none;
@@ -170,18 +166,3 @@ tbody tr {
     font-size: 22px;
 }
 
-.previous-btn {
-
-}
-
-.next-btn {
-
-}
-
-.page-number {
-
-}
-
-.pagination-result {
-
-}
