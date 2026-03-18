@@ -86,6 +86,8 @@ export class ListUser {
     };
     this.userService.getUserByPage(state).subscribe({
       next : (data) => {
+        console.log("asdfad",data.users.length)
+        if(data.users.length == 0 && data.totalCount > 1) this.getUserByPage(0);
         this.cd.detectChanges();
         console.log(this.users);
       }
