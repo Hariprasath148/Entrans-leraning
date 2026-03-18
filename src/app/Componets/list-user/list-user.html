@@ -4,7 +4,7 @@
             <input type="text" name="serch" id="search" [(ngModel)]="searchText" placeholder="Search by id , name, email or phone...">
             <button (click)="reset()" class="reset-btn"><i class="fas fa-undo"></i></button>
         </div>
-        <button class="search-btn" (click)="search()">Serach</button>
+        <button class="search-btn" (click)="search(3)">Serach</button>
     </div>
     <table  class="user-table">
         <thead>
@@ -37,6 +37,16 @@
             </ng-container>
         </tbody>
     </table>
+    <div class="pagination-container d-flex" *ngIf="users.length != 0">
+        <div class="page-number-btn-container  d-flex">
+            <button (click)="getUserByPage(0)" class="previous-btn page-navigation-btn d-flex" [disabled]="isPreDisable"><span><</span>previous</button>
+            <p class="page-number">{{pageNumber}}</p>
+            <button (click)="getUserByPage(1)" class="next-btn page-navigation-btn d-flex" [disabled]="isNextDisable">next<span>></span></button>
+        </div>
+        <div class="pagination-result">
+            showing {{currentPageSize}} result of {{totalCount}}
+        </div>
+    </div>
 </div>
 <!-- <router-outlet></router-outlet> -->
 

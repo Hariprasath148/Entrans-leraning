@@ -15,7 +15,13 @@ export class ListUser {
   public User:any;
   
   public searchText = "";
-
+  public pageNumber:number = 0;
+  public currentPageSize:number = 0;
+  public totalCount:number = 0;
+  public pageSize:number = 0;
+  public isSearch:boolean = false;
+  public isPreDisable:boolean = true;
+  public isNextDisable:boolean = true;
   constructor(private userService:User,private authService : Auth,private cd : ChangeDetectorRef,private toastr: ToastrService){}
 
   ngOnInit() {
@@ -23,7 +29,11 @@ export class ListUser {
       this.User = user;
     });
     this.userService.allUser$.subscribe(data => this.users = data);
-    this.getUserDetails();
+    this.userService.pageNumber.subscribe(number=>{this.pageNumber = number ; this.updateBtnStatus()});
+    this.userService.currentPageSize.subscribe(number=>{this.currentPageSize = number; this.updateBtnStatus()});
+    this.userService.totalCount.subscribe(number=>this.totalCount = number);
+    this.userService.pageSize.subscribe(number=>{this.pageSize = number; this.updateBtnStatus()});
+    this.getUserByPage(4);
   }
 
   getUserDetails() {
@@ -38,27 +48,42 @@ export class ListUser {
       this.userService.deleteUserById(id).subscribe({
         next : (data) => {
           this.toastr.success('Deleted');
-          this.getUserDetails();
+          this.getUserByPage(4);
         },
       })
     }
   }
 
-  search() {
-    if(this.searchText.length == 0) {
-      this.getUserDetails();
-      return;
-    }
-    this.userService.search(this.searchText).subscribe({
-      next : ()=> {
+  search(state:number) {
+    this.isSearch = true;
+    this.userService.search(this.searchText,state).subscribe({
+      next : (data)=> {   
         this.cd.detectChanges();
       }
     });
   }
 
   reset() {
-    if(this.searchText.length == 0) return;
     this.searchText = "";
-    this.getUserDetails();
+    this.isSearch = false;
+    this.getUserByPage(3);
+  }
+
+  getUserByPage(state:number) {
+    if(this.isSearch){ 
+      this.search(state);
+      return
+    };
+    this.userService.getUserByPage(state).subscribe({
+      next : (data) => {
+        this.cd.detectChanges();
+        console.log(this.users);
+      }
+    });
+  }
+
+  updateBtnStatus() {
+    this.isPreDisable = this.pageNumber === 1;
+    this.isNextDisable = this.pageNumber*this.pageSize >= this.totalCount;
   }
 }

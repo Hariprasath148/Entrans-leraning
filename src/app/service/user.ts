@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of, tap } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject, tap } from 'rxjs';
 import { Auth } from './auth';
 
 @Injectable({
@@ -11,6 +11,11 @@ export class User {
 
   private allUserSubject = new BehaviorSubject<any[]>([]);
   public  allUser$ = this.allUserSubject.asObservable();
+
+  public pageNumber = new BehaviorSubject<number>(1);
+  public currentPageSize = new BehaviorSubject<number>(0);
+  public totalCount = new BehaviorSubject<number>(0);
+  public pageSize = new BehaviorSubject<number>(10);
   
   constructor(private http: HttpClient,private autUser:Auth) {}
 
@@ -37,6 +42,21 @@ export class User {
     );
   }
 
+  getUserByPage(state:Number):Observable<any> {
+    let pageNumber;
+    if(state==3) pageNumber=1;
+    else if(state==4) pageNumber=this.pageNumber.value;
+    else pageNumber = (state==1) ? this.pageNumber.value+1 : this.pageNumber.value-1;
+    this.pageNumber.next(pageNumber);
+    return this.http.get<any>(`${this.baseUrl}/getUserByPage?pageNumber=${pageNumber}&pageSize=${this.pageSize.value}`).pipe(
+      tap(data => {
+        this.allUserSubject.next(data.users);
+        this.totalCount.next(data.totalCount);
+        this.currentPageSize.next(data.currentCount);
+      })
+    );
+  }
+
   getUserById(id:number):Observable<any> {
     if(id == this.autUser.getUser().id) return of(structuredClone(this.autUser.getUser()));
 
@@ -57,9 +77,18 @@ export class User {
     return this.http.delete<any>(`${this.baseUrl}/deleteUserById/${id}`);
   }
 
-  search(email:string):Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/search/${email}`).pipe(
-      tap(users => this.allUserSubject.next(users))
+  search(searchText:string,state:number):Observable<any> {
+    let pageNumber;
+    if(state==3) pageNumber=1;
+    else if(state==4) pageNumber=this.pageNumber.value;
+    else pageNumber = (state==1) ? this.pageNumber.value+1 : this.pageNumber.value-1;
+    this.pageNumber.next(pageNumber);
+    return this.http.get<any>(`${this.baseUrl}/search/${searchText}?pageNumber=${pageNumber}&pageSize=${this.pageSize.value}`).pipe(
+      tap(data => {
+        this.allUserSubject.next(data.users);
+        this.totalCount.next(data.totalCount);
+        this.currentPageSize.next(data.currentCount);
+      })
     )
   }
 }
