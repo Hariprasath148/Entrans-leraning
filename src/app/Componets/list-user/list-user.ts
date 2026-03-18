@@ -64,9 +64,19 @@ export class ListUser {
   }
 
   reset() {
+    if(this.searchText.length == 0) {
+      this.getUserByPage(4);
+      return;
+    }
     this.searchText = "";
-    this.isSearch = false;
-    this.getUserByPage(3);
+    if(this.isSearch) {
+      this.isSearch = false;
+      this.getUserByPage(3);
+    }
+    else {
+      this.isSearch = false;
+      this.getUserByPage(4);
+    }
   }
 
   getUserByPage(state:number) {
