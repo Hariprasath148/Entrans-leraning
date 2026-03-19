@@ -27,6 +27,7 @@ export class AddUser {
    * then reset the add user form
    * 
    * @param {NgForm} addNewUserForm  - contains valid of the new user validation and values contains the new user details
+   * @returns doen't return anything
    */
   addNewUser(addNewUserForm:NgForm) {
     console.log(addNewUserForm.value)

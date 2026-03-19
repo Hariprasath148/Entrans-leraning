@@ -58,6 +58,8 @@ export class User {
    * 
    * send the request to backend API,
    * then session is cleared with the help of Asp.net
+   * 
+   * @returns doen't return anything
    */
   logout() {
     return this.http.post(`${this.baseUrl}/logout`,{});

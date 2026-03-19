@@ -33,6 +33,8 @@ export class Auth {
    * 
    * get the user,
    * then set the current user in the behaviour subject "currentUserSUbject" using next
+   * 
+   * @returns doen't return anything
    */
   setUser(user:any) {
     this.currentUserSubject.next(user);

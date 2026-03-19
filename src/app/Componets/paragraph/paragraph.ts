@@ -22,6 +22,8 @@ export class Paragraph {
 
   /**
    * Hide the error when user enter the input without the hite space
+   * 
+   * @returns doen't return anything
    */
   changeError() {
     this.question().isAttended=true;
@@ -32,7 +34,9 @@ export class Paragraph {
    * 
    * get the event e after the chage is happend in the input,
    * then send the data to parent using the output "answerChange"
+   * 
    * @param {event} e - event from the input 
+   * @returns doen't return anything
    */
   handleInput(e : Event):any {
     this.answerChange.emit({

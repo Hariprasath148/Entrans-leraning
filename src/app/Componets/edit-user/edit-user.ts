@@ -32,6 +32,8 @@ export class EditUser {
    * 
    * id - id for the edit user
    * set the used deatils in the user for edit
+   * 
+   * @returns doen't return anything
    */
   ngOnInit() {
     let id:number = Number(this.route.snapshot.paramMap.get('id'));
@@ -57,6 +59,7 @@ export class EditUser {
    * using the userService updateUser method
    * 
    * @param {NgForm} updateUserForm - updated record from the ngform contains the validation and values of update record 
+   * @returns doen't return anything
    */
   updateUser(updateUserForm : NgForm) {
     if(updateUserForm.invalid) return;

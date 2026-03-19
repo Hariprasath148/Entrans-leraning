@@ -30,6 +30,8 @@ export class DashBoard {
 
   /**
    * logout - logout the user and navigates to the login page
+   * 
+   * @returns doen't return anything
    */
   logout() {
   this.userService.logout().subscribe(() => {

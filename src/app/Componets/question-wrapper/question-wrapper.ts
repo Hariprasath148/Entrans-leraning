@@ -35,6 +35,8 @@ export class QuestionWrapper {
    * 
    * get the question from the backend,
    * then update the question and questionStatus
+   * 
+   * @returns doen't return anything
    */
   getQuestion() {
     this.questionPaperServie.getAllQuestion().subscribe({
@@ -57,6 +59,7 @@ export class QuestionWrapper {
    * send the request to the Backend API with the answer,
    * then again get the question in subcribtion
    * 
+   * @returns doen't return anything
    */
   setAnswer(e : any) {
     this.questionPaperServie.setAnswer(e).subscribe(()=> {this.getQuestion()});
@@ -65,6 +68,8 @@ export class QuestionWrapper {
    /**
    * check - check the all the answer,
    * then again get the question in subcribtion
+   * 
+   * @returns doen't return anything
    */
   sumitAnswer() {
     this.questionPaperServie.checkAnswer().subscribe(()=> {this.getQuestion()});

@@ -30,6 +30,8 @@ export class Home {
    * 
    * @param {event} e - event  
    * @param {NgForm} loginForm - container ngform with the validation and value contains email and password
+   * 
+   * @returns doen't return anything
    */
   onSubmit(e : Event , loginForm : NgForm) {
 

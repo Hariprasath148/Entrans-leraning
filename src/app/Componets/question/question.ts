@@ -24,6 +24,8 @@ export class Question {
    * send the answer to parent container
    * 
    * @param {any} e - send the child to the parrent
+   * 
+   * @returns doen't return anything
    */
   sendToParentAnswer(e : any) {
     this.getChildAnswer.emit(e);

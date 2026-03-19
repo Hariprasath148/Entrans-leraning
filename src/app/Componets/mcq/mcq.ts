@@ -25,7 +25,9 @@ export class Mcq {
    * 
    * get the event e after the chage is happend in the input,
    * then send the data to parent using the output "answerChange"
+   * 
    * @param {event} e - event from the input 
+   * @returns doen't return anything
    */
   handleInput(e : Event):any {
     this.answerChange.emit({
