@@ -32,7 +32,7 @@
                     <td>{{user.phoneNumber}}</td>
                     <td>{{user.role}}</td>
                     <td  *ngIf="User.role === 'Admin'"><a class="view-button" [routerLink]="['/dashboard/viewUser',user.id]">View</a></td>
-                    <td  *ngIf="User.role === 'Admin'" class="delete-td"><button class="delete-button" (click)="deletedUserByID(user.id)">Delete</button></td>
+                    <td  *ngIf="User.role === 'Admin'" class="delete-td"><button class="delete-button" (click)="deleteUserByID(user.id)">Delete</button></td>
                 </tr>
             </ng-container>
         </tbody>

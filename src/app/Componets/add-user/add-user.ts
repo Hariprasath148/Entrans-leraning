@@ -11,11 +11,23 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AddUser {
 
+  /**
+   * isError - ture is error occured after submission else false
+   * error - error message from the backend
+   */
   public isError : boolean = false;
   public errorMsg : string = "";
 
   constructor(private userService : User , private cd : ChangeDetectorRef,private toastr: ToastrService) {}
 
+  /**
+   * addNewUser - add the new user or admin
+   * 
+   * send the data to the userService addUser,
+   * then reset the add user form
+   * 
+   * @param {NgForm} addNewUserForm  - contains valid of the new user validation and values contains the new user details
+   */
   addNewUser(addNewUserForm:NgForm) {
     console.log(addNewUserForm.value)
     if(addNewUserForm.invalid ) return;

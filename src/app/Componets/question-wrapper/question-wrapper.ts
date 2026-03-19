@@ -8,16 +8,34 @@ import { QuestionPaper } from '../../service/question-paper';
   styleUrl: './question-wrapper.css',
 })
 export class QuestionWrapper {
-   questionStatus = false;
 
+  /**
+   * defines the question is fetch or not
+   * true - fetch 
+   * false - not fetched
+   */
+  questionStatus = false;
+
+  /**
+   * contains the question from the backend
+   */
   questions:any = {}; 
 
   constructor(private questionPaperServie : QuestionPaper , private cd : ChangeDetectorRef) {}
 
+  /**
+   * get the question when the component is mounted
+   */
   ngOnInit() {
    this.getQuestion();
   }
   
+  /**
+   * getQuestions - fetch the question
+   * 
+   * get the question from the backend,
+   * then update the question and questionStatus
+   */
   getQuestion() {
     this.questionPaperServie.getAllQuestion().subscribe({
       next : (data) => {
@@ -33,11 +51,21 @@ export class QuestionWrapper {
     });
   }
 
-
+  /**
+   * setAnswer - update the answer
+   * 
+   * send the request to the Backend API with the answer,
+   * then again get the question in subcribtion
+   * 
+   */
   setAnswer(e : any) {
     this.questionPaperServie.setAnswer(e).subscribe(()=> {this.getQuestion()});
   }
 
+   /**
+   * check - check the all the answer,
+   * then again get the question in subcribtion
+   */
   sumitAnswer() {
     this.questionPaperServie.checkAnswer().subscribe(()=> {this.getQuestion()});
   }

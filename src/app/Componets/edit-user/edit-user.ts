@@ -12,12 +12,27 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './edit-user.css',
 })
 export class EditUser {
+  /**
+   * user - user want to edit
+   * isError - error message from backend after edit
+   * errorMsg - error message from the backend
+   */
   user : any;
   public isError : boolean = false;
   public errorMsg : string = "";
   constructor ( private userService : User,private route : ActivatedRoute,private cd : ChangeDetectorRef , private router : Router,private authService : Auth,private toastr: ToastrService){}
+
+  /**
+   * current user details get from the authService
+   */
   public User:any;
   
+  /**
+   * get the user detail want to edit
+   * 
+   * id - id for the edit user
+   * set the used deatils in the user for edit
+   */
   ngOnInit() {
     let id:number = Number(this.route.snapshot.paramMap.get('id'));
     this.authService.currentUser$.subscribe(user=> {
@@ -35,6 +50,14 @@ export class EditUser {
     });
   }
 
+  /**
+   * updateUser - update the user or admin details
+   * 
+   * get the update user details form the ngFor check the valid or not and send to the backend API
+   * using the userService updateUser method
+   * 
+   * @param {NgForm} updateUserForm - updated record from the ngform contains the validation and values of update record 
+   */
   updateUser(updateUserForm : NgForm) {
     if(updateUserForm.invalid) return;
 

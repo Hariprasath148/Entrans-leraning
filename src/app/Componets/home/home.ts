@@ -11,18 +11,26 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './home.css',
 })
 export class Home {
+
+  /**
+   * invalidCrendential - the entered crendentials is valid or not
+   * invalidCredentialMsg - message from the backend
+   * isLogin - user logged in or not
+   */
   invalidCrentials = false;
   invalidCrentialsMsg = "";
   isLogIn = false;
-  // loginStatus  = {
-  //   invalidCrentials : false,
-  //   invalidEmail : false,
-  //   isEmail : false,
-  //   isPassword : false
-  // }
- 
+  
   constructor(private router : Router,private userService : User , private cd : ChangeDetectorRef,private toastr: ToastrService){}
 
+  /**
+   * onSubmit - submit the login
+   * 
+   * send the data to the userservice login funtino with the login credentials email and password
+   * 
+   * @param {event} e - event  
+   * @param {NgForm} loginForm - container ngform with the validation and value contains email and password
+   */
   onSubmit(e : Event , loginForm : NgForm) {
 
     if(loginForm.invalid) return; 

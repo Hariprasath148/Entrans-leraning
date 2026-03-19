@@ -11,17 +11,26 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./dash-board.css'],
 })
 export class DashBoard {
-
+  /** 
+   * store current user data
+   * @type {any}
+  */
   public User:any;
 
   constructor(private userService : User , private authService : Auth , private router: Router,private cd : ChangeDetectorRef,private toastr: ToastrService) {}
 
+  /**
+   * get the current user from the auth service and update the User
+   */
   ngOnInit() {
     this.authService.currentUser$.subscribe(user=> {
       this.User = user;
     });
   }
 
+  /**
+   * logout - logout the user and navigates to the login page
+   */
   logout() {
   this.userService.logout().subscribe(() => {
     localStorage.clear();

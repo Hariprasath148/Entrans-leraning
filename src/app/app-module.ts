@@ -28,6 +28,7 @@ import { AuthInterceptor } from './Interceptor/auth-interceptor';
 
 @NgModule({
   declarations: [
+    /** Components */
     App,
     DashBoard,
     Home,
@@ -44,6 +45,7 @@ import { AuthInterceptor } from './Interceptor/auth-interceptor';
     QuestionWrapper
   ],
   imports: [
+    /** Modules */
     BrowserModule,
     AppRoutingModule,
     FormsModule,
@@ -53,14 +55,19 @@ import { AuthInterceptor } from './Interceptor/auth-interceptor';
     ToastrModule.forRoot()
   ],
   providers: [
+    /** Providers */
     provideBrowserGlobalErrorListeners(),
     provideClientHydration(withEventReplay()),
+    /** Http Client Configuration */
     provideHttpClient(
       withFetch(),
+      /** Interceptor */
       withInterceptors([AuthInterceptor])
     ),
+    /** Users defined Services */
     QuestionPaper,
-    User
+    User,
+    Auth
   ],
   bootstrap: [App]
 })

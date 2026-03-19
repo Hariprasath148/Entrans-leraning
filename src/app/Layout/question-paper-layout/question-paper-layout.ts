@@ -8,8 +8,18 @@ import { QuestionPaper } from '../../service/question-paper';
   styleUrls: ['./question-paper-layout.css'],
 })
 export class QuestionPaperLayout {
-  questionStatus = false;
 
+  /**
+   * Indicates question is fetch form the backend or not
+   * true - fetch 
+   * false - not fetched
+   * @type {boolean}
+   */
+  questionStatus: boolean = false;
+  /**
+   * stores the list of question fetched from the backend
+   * @type {any}
+   */
   questions:any = {}; 
 
   constructor(private questionPaperServie : QuestionPaper , private cd : ChangeDetectorRef) {}
@@ -28,6 +38,11 @@ export class QuestionPaperLayout {
   //   })
   // }
   
+  /**
+   * getQuestion 
+   * 
+   * get the question from the backend and update the record in the questions and update the question status
+   */
   getQuestion() {
     this.questionPaperServie.getAllQuestion().subscribe({
       next : (data) => {
@@ -43,11 +58,22 @@ export class QuestionPaperLayout {
     });
   }
 
-
+  /**
+   * setAnswer - update the answer in the backend
+   * 
+   * get the value that is emitted from the child and set the answer in the backend record
+   * 
+   * @param{any} e - contains the quesiton update record
+   */
   setAnswer(e : any) {
     this.questionPaperServie.setAnswer(e).subscribe(()=> {this.getQuestion()});
   }
 
+  /**
+   * sumitAnswer - submit the answer in the backend
+   * 
+   * submit the answer in the backend
+   */
   sumitAnswer() {
     this.questionPaperServie.checkAnswer().subscribe(()=> {this.getQuestion()});
   }

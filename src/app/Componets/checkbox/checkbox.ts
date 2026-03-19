@@ -7,15 +7,38 @@ import { Component, input, output } from '@angular/core';
   styleUrl: './checkbox.css',
 })
 export class Checkbox {
+  /**
+   * isSubmitted status of question is sumitted or not
+   */
   isSubmitted = input<boolean>(false);
+  /**
+   * send the output to the parent
+   */
   question = input<any>();
+  /**
+   * question from the parent
+   */
   answerChange = output<any>();
+
+  /**
+   * answer list
+   */
   answer:string[] = [];
   
+  /**
+   * set the answer if already saved
+   */
   ngOnInit() {
     this.answer = this.question().answerList;
   }
   
+  /**
+   * handleInput - handle the input
+   * 
+   * get the event e after the chage is happend in the input,
+   * then send the data to parent using the output "answerChange"
+   * @param {event} e - event from the input 
+   */
   handleInput(e : Event):any {
 
     if((e.target as HTMLInputElement).checked) {
