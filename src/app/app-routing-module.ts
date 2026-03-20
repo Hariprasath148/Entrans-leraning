@@ -19,7 +19,7 @@ const routes: Routes = [
     title : "DashBoard",
     /** For DashBoard Route Gaurd */
     canActivate : [AuthGuard],
-    /** For can Routes Gaurd */
+    /** For child Routes Gaurd */
     canActivateChild : [RoleGuard],
     children : [
       {path : "", component : ListUser ,data :{roles : ['Admin','User']}},
